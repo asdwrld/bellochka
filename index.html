@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для самой лучшей 💜</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(135deg, #171326, #35204b, #171326);
+}
+
+.card {
+    width: 100%;
+    max-width: 480px;
+    padding: 30px 22px;
+    text-align: center;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+}
+
+h1 {
+    color: #e2baff;
+    font-size: 30px;
+}
+
+.subtitle {
+    color: #d5c9e5;
+    line-height: 1.6;
+}
+
+.numbers {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.numbers button {
+    padding: 14px 5px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    background: #50356d;
+    border: 1px solid #79569b;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.numbers button:hover {
+    background: #9362bd;
+    transform: translateY(-2px);
+}
+
+.numbers button:focus {
+    outline: 2px solid #edcfff;
+}
+
+#answer {
+    min-height: 85px;
+    margin: 20px 0;
+    padding: 18px;
+    color: #f1e4ff;
+    line-height: 1.6;
+    background: rgba(0,0,0,0.2);
+    border-radius: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    color: white;
+    background: #241a33;
+    border: 1px solid #79569b;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: #b8a8c9;
+}
+
+.send {
+    width: 100%;
+    padding: 14px;
+    color: white;
+    background: #8956b3;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.send:hover {
+    background: #a16bce;
+}
+
+#final {
+    margin-top: 20px;
+    line-height: 1.7;
+    color: #e2baff;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+
+    <h1>Привет, тётя!!! 💜</h1>
+
+    <p class="subtitle">
+        Как ты себя сегодня чувствуешь?<br>
+        Выбери цифру от 1 до 10.
+    </p>
+
+    <div class="numbers">
+        <button onclick="rate(1)">1</button>
+        <button onclick="rate(2)">2</button>
+        <button onclick="rate(3)">3</button>
+        <button onclick="rate(4)">4</button>
+        <button onclick="rate(5)">5</button>
+        <button onclick="rate(6)">6</button>
+        <button onclick="rate(7)">7</button>
+        <button onclick="rate(8)">8</button>
+        <button onclick="rate(9)">9</button>
+        <button onclick="rate(10)">10</button>
+    </div>
+
+    <div id="answer" aria-live="polite">
+        Твоя оценка здесь превратится в сообщение 💌
+    </div>
+
+    <p class="subtitle">А теперь напиши любое слово:</p>
+
+    <input id="word" type="text" placeholder="Твоё слово..." maxlength="100">
+
+    <button class="send" onclick="finish()">
+        Получить сообщение 💌
+    </button>
+
+    <div id="final" aria-live="polite"></div>
+
+</div>
+
+<script>
+const messages = {
+    1: "Ну не грусти. Если захочешь, напиши мне — я выслушаю ❤️",
+    2: "Уже лучше, но если что-то тревожит, можешь мне рассказать 💜",
+    3: "Ну это вообще ни рыба ни мясо. Давай не кисни!",
+    4: "Симпл тоже когда-то был бездарем. Но этот парень с тобой рядом не стоял — ты прекрасна!",
+    5: "Ну более-менее! Может, пора в Дискорд, всё обсудим и решим 😊",
+    6: "Ну что-то уже получается! Пойдём в Faceit, я какую-нибудь хуйню вкину — и кайф 😂",
+    7: "Ну ты типа Монеси! Донк и остальные вообще раки, а ты умничка 💜",
+    8: "Ты вообще ракета, бомба, петарда! Давай в том же духе 🚀",
+    9: "Просто красотка! Но это не десяточка. Скажи мальчику, чего тебе не хватило 😉",
+    10: "Умничка, красотка, легенда! Ты сияешь как никогда! ✨"
+};
+
+function rate(number) {
+    document.getElementById("answer").textContent = messages[number];
+ }
+
+function finish() {
+    const word = document.getElementById("word").value.trim();
+if (word) {
+        document.getElementById("final").textContent =
+            "Твоё слово: «" + word + "» 💜";
+    } else {
+        document.getElementById("final").textContent = "";
+    }
+
+    document.getElementById("final").textContent +=
+        (word ? "\n\n" : "") +
+        "В любом настроении ты смело можешь написать мне. " +
+        "Я всегда готов выслушать, поддержать или просто поговорить ❤️";
+}
+</script>
+</body>
+</html>
